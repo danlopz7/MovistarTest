@@ -1,4 +1,4 @@
-package com.dlopez.test.springbackend.models;
+package com.dlopez.test.springbackend.models.request;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,6 +18,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ClientDto {
+
+    //falta agregar propiedas. esta entidad es la que construye DtoMapperClient
+    //de momento no la necesito ya que puedo agarrar todas las propiedades de esta entidad 
+    //originalmente se hizo esto para modelar el json que recibo en el request de update @RequestBody
+    //con el fin de quitar la password del json
     
     @NotBlank
     @Size(min = 3, max = 15)

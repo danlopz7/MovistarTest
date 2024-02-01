@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.dlopez.test.springbackend.models.ClientDto;
 import com.dlopez.test.springbackend.models.entities.Client;
 import com.dlopez.test.springbackend.repository.AddressRepository;
 import com.dlopez.test.springbackend.repository.ClientRepository;
@@ -35,15 +34,26 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     @Transactional
-    public Client save(Client user) {
-        return null;
+    public Client save(Client client) {
+        return clientRepository.save(client);
     }
 
     @Override
     @Transactional
-    public Optional<Client> update(ClientDto user, Long id) {
-        return null;
-        
+    public Optional<Client> update(Client client, Long id) {
+        Optional<Client> o = clientRepository.findById(id);
+        Client clientOptional = null;
+        if (o.isPresent()) {
+            Client clientDb = o.orElseThrow();
+            clientDb.setUsername(client.getUsername());
+            clientDb.setName(client.getName());
+            clientDb.setLastname(client.getLastname());
+            clientDb.setEmail(client.getEmail());
+            clientDb.setPhone(client.getPhone());
+            clientDb.setIdentification(client.getIdentification());
+            clientOptional = clientRepository.save(clientDb);
+        }
+        return Optional.ofNullable(clientOptional);
     }
 
     @Override
@@ -51,5 +61,5 @@ public class ClientServiceImpl implements ClientService {
     public void remove(Long id) {
         clientRepository.deleteById(id);
     }
-     
+
 }

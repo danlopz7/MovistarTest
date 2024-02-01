@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.dlopez.test.springbackend.models.auditable.Auditable;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,11 +36,16 @@ import lombok.Setter;
 @Table(name = "clients")
 @Getter
 @Setter
-public class Client {
+public class Client extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank
+    @Size(min = 3, max = 15)
+    @Column(unique = true)
+    private String username;
     
     @NotBlank
     @Size(min = 3, max = 15)
@@ -48,17 +55,19 @@ public class Client {
     @Size(min = 3, max = 15)
     private String lastname;
 
-    @NotBlank
-    private String identification;
-
-    @NotBlank
-    private String phone;
-
     @NotEmpty
     @Email
     @Column(unique = true)
     private String email;
 
+    @NotBlank
+    @Column(unique = true)
+    private String phone;
+
+    @NotBlank
+    @Column(unique = true)
+    private String identification;
+    
    /*  @ManyToMany
     @JoinTable(
         name = "users_roles", 
@@ -67,15 +76,15 @@ public class Client {
         uniqueConstraints = { @UniqueConstraint(columnNames = {"client_id", "address_id"})})
     private List<Address> addresses; */
 
-    @OneToMany(
+   /*  @OneToMany(
         fetch = FetchType.EAGER,
         cascade = CascadeType.ALL
     )
-    private Set<Address> addresses = new HashSet<>();
+    private Set<Address> addresses = new HashSet<>(); */
 
-    @NotNull
+  /*   @NotNull
     @Column(name = "create_at")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createAt;
+    private Date createAt = new Date(); */
 
 }
