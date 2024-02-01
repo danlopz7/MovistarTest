@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.dlopez.test.springbackend.models.auditable.Auditable;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -46,7 +47,7 @@ public class Client extends Auditable {
     @Size(min = 3, max = 15)
     @Column(unique = true)
     private String username;
-    
+
     @NotBlank
     @Size(min = 3, max = 15)
     private String name;
@@ -67,24 +68,22 @@ public class Client extends Auditable {
     @NotBlank
     @Column(unique = true)
     private String identification;
-    
-   /*  @ManyToMany
-    @JoinTable(
-        name = "users_roles", 
-        joinColumns = @JoinColumn(name = "client_id"), 
-        inverseJoinColumns = @JoinColumn(name = "address_id"),
-        uniqueConstraints = { @UniqueConstraint(columnNames = {"client_id", "address_id"})})
-    private List<Address> addresses; */
 
-   /*  @OneToMany(
-        fetch = FetchType.EAGER,
-        cascade = CascadeType.ALL
-    )
-    private Set<Address> addresses = new HashSet<>(); */
+    //@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private Set<Address> addresses = new HashSet<>();
 
-  /*   @NotNull
-    @Column(name = "create_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createAt = new Date(); */
+    /*
+     * @ManyToMany
+     * 
+     * @JoinTable(
+     * name = "users_roles",
+     * joinColumns = @JoinColumn(name = "client_id"),
+     * inverseJoinColumns = @JoinColumn(name = "address_id"),
+     * uniqueConstraints = { @UniqueConstraint(columnNames = {"client_id",
+     * "address_id"})})
+     * private List<Address> addresses;
+     */
 
 }

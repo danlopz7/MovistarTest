@@ -19,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dlopez.test.springbackend.models.dto.ClientDto;
+import com.dlopez.test.springbackend.models.entities.Address;
 import com.dlopez.test.springbackend.models.entities.Client;
+import com.dlopez.test.springbackend.models.request.ClientRequest;
 import com.dlopez.test.springbackend.services.ClientService;
 
 import jakarta.validation.Valid;
@@ -39,7 +42,7 @@ public class ClientController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> show(@PathVariable(name = "id") Long id) {
-        Optional<Client> client = clientService.findById(id);
+        Optional<ClientDto> client = clientService.findById(id);
 
         if (client.isPresent()) {
             return ResponseEntity.ok(client.orElseThrow());
@@ -52,15 +55,17 @@ public class ClientController {
         if (result.hasErrors()) {
             return validation(result);
         }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(clientService.save(client));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@Valid @RequestBody Client client, BindingResult result, @PathVariable Long id) {
+    public ResponseEntity<?> update(@Valid @RequestBody ClientRequest client, BindingResult result,
+            @PathVariable(name = "id") Long id) {
         if (result.hasErrors()) {
             return validation(result);
         }
-        Optional<Client> o = clientService.update(client, id);
+        Optional<ClientDto> o = clientService.update(client, id);
 
         if (o.isPresent()) {
             return ResponseEntity.status(HttpStatus.CREATED).body(o.orElseThrow());
@@ -70,7 +75,7 @@ public class ClientController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> remove(@PathVariable Long id) {
-        Optional<Client> o = clientService.findById(id);
+        Optional<ClientDto> o = clientService.findById(id);
 
         if (o.isPresent()) {
             clientService.remove(id);
