@@ -1,5 +1,6 @@
 package com.dlopez.test.springbackend.models.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -72,7 +73,7 @@ public class Client extends Auditable {
     //@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private Set<Address> addresses = new HashSet<>();
+    private List<Address> addresses;
 
     /*
      * @ManyToMany

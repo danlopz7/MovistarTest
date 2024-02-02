@@ -1,5 +1,6 @@
 package com.dlopez.test.springbackend.models.dto;
 
+import java.util.List;
 import java.util.Set;
 
 import com.dlopez.test.springbackend.models.entities.Address;
@@ -22,6 +23,6 @@ public class ClientDto {
     private String email;
     private String phone;
     private String identification;
-    private Set<Address> addresses;
+    private List<Address> addresses;
 
 }

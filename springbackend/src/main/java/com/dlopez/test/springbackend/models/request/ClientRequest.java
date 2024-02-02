@@ -1,5 +1,6 @@
 package com.dlopez.test.springbackend.models.request;
 
+import java.util.List;
 import java.util.Set;
 
 import com.dlopez.test.springbackend.models.entities.Address;
@@ -37,5 +38,5 @@ public class ClientRequest {
     @NotBlank
     private String phone;
 
-    private Set<Address> addresses;
+    private List<Address> addresses;
 }

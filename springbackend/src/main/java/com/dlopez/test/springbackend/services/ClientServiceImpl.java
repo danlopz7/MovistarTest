@@ -80,16 +80,20 @@ public class ClientServiceImpl implements ClientService {
         clientRepository.deleteById(id);
     }
 
-    private void updateAddresses(Client clientDb, Set<Address> newAddresses) {
+    private void updateAddresses(Client clientDb, List<Address> newAddresses) {
 
         // Eliminar direcciones que ya no están presentes
         clientDb.getAddresses().removeIf(address -> !newAddresses.contains(address));
 
         // Actualizar o agregar nuevas direcciones
-        for (Address newAddress : newAddresses) {
-            if (!clientDb.getAddresses().contains(newAddress)) {
-                newAddress.setClient(clientDb);
-                clientDb.getAddresses().add(newAddress);
+        if (newAddresses != null) {
+            for (Address newAddress : newAddresses) {
+                if (!newAddress.getStreet().trim().isEmpty() && !newAddress.getNumber().trim().isEmpty()) {
+                    if (!clientDb.getAddresses().contains(newAddress)) {
+                        newAddress.setClient(clientDb);
+                        clientDb.getAddresses().add(newAddress);
+                    }
+                }
             }
         }
     }

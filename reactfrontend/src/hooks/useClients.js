@@ -14,7 +14,7 @@ const initialClientForm = {
     email: '',
     phone: '',
     identification: '',
-    //directions: []
+    addresses: []
 }
 
 const initialErrors = {
@@ -31,10 +31,13 @@ export const useClients = () => {
     const [clients, dispatch] = useReducer(clientsReducer, initialClients);
     const [clientSelected, setClientSelected] = useState(initialClientForm)
     const [visibleForm, setVisibleForm] = useState(false);
+    //const [addresses, setAddresses] = useState([]);
 
     const [errors, setErrors] = useState(initialErrors)
 
     const navigate = useNavigate()
+
+ 
 
     const getClients = async () => {
         const result = await findAll();
@@ -129,11 +132,11 @@ export const useClients = () => {
 
     }
 
-  /*   const handlerClientSelectedForm = (client) => {
-        // console.log(user)
-        setVisibleForm(true);
-        setClientSelected({ ...client });
-    } */
+    /*   const handlerClientSelectedForm = (client) => {
+          // console.log(user)
+          setVisibleForm(true);
+          setClientSelected({ ...client });
+      } */
 
     const handlerClientSelectedForm = (id, showModal) => {
         setErrors({})
@@ -154,6 +157,8 @@ export const useClients = () => {
         setErrors({})
     }
 
+    
+
     return {
         clients,
         clientSelected,
@@ -165,6 +170,8 @@ export const useClients = () => {
         handlerClientSelectedForm,
         handlerOpenForm,
         handlerCloseForm,
-        getClients
+        getClients,
+        //handleAddAddress,
+        //handleAddressChange
     }
 }

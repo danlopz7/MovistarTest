@@ -14,7 +14,7 @@ export const findAll = async () => {
     return null
 }
 
-export const save = async ({ username, name, lastname, email, phone, identification }) => {
+export const save = async ({ username, name, lastname, email, phone, identification, addresses }) => {
     try {
         return await axios.post(BASE_URL, {
             username,
@@ -22,14 +22,15 @@ export const save = async ({ username, name, lastname, email, phone, identificat
             lastname,
             email,
             phone,
-            identification
+            identification,
+            addresses
         })
     } catch (error) {
         throw error;
     }
 }
 
-export const update = async ({ id, username, name, lastname, email, phone, identification }) => {
+export const update = async ({ id, username, name, lastname, email, phone, identification, addresses }) => {
     try {
         return await axios.put(`${BASE_URL}/${id}`, {
             username,
@@ -37,7 +38,8 @@ export const update = async ({ id, username, name, lastname, email, phone, ident
             lastname,
             email,
             phone,
-            identification
+            identification,
+            addresses
         })
     } catch (error) {
         throw error;
