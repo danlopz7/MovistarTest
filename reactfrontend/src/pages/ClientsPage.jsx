@@ -27,7 +27,7 @@ export const ClientsPage = () => {
                     <div className="col">
                         {visibleForm ||
                             <button
-                                className="btn btn-primary my-2"
+                                className="btn btn-primary my-3"
                                 type="button"
                                 onClick={handlerOpenForm}>
                                 Nuevo Cliente

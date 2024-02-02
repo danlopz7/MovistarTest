@@ -8,7 +8,7 @@ export const ClientsList = () => {
 
     return (
         <table className="table table-hover table-striped">
-            <thead>
+            <thead className="thead-dark">
                 <tr>
                     <th>#</th>
                     <th>Usuario</th>

@@ -1,8 +1,5 @@
 package com.dlopez.test.springbackend.controller;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +25,7 @@ import com.dlopez.test.springbackend.models.dto.ClientDto;
 import com.dlopez.test.springbackend.models.entities.Client;
 import com.dlopez.test.springbackend.models.request.ClientRequest;
 import com.dlopez.test.springbackend.services.ClientService;
-import com.opencsv.CSVWriter;
+import com.dlopez.test.springbackend.util.Utility;
 
 import jakarta.validation.Valid;
 
@@ -103,7 +100,7 @@ public class ClientController {
     public ResponseEntity<byte[]> generateClientReport() {
         List<Client> clients = clientService.findAll();
 
-        byte[] reportBytes = generateCsvReport(clients);
+        byte[] reportBytes = Utility.generateCsvReport(clients);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.TEXT_PLAIN);
@@ -112,34 +109,4 @@ public class ClientController {
         return new ResponseEntity<>(reportBytes, headers, HttpStatus.OK);
     }
 
-    private byte[] generateCsvReport(List<Client> clients) {
-        try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                CSVWriter csvWriter = new CSVWriter(new OutputStreamWriter(baos))) {
-
-            String[] headers = { "ID", "Username", "Name", "Lastname", "Email", "Phone", "Identification",
-                    "Addresses" };
-            csvWriter.writeNext(headers);
-
-            for (Client client : clients) {
-                String[] data = {
-                        String.valueOf(client.getId()),
-                        client.getUsername(),
-                        client.getName(),
-                        client.getLastname(),
-                        client.getEmail(),
-                        client.getPhone(),
-                        client.getIdentification(),
-                        client.getAddresses().toString()
-                };
-                csvWriter.writeNext(data);
-            }
-
-            csvWriter.flush();
-            return baos.toByteArray();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new byte[0];
-        }
-    }
 }
