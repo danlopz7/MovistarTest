@@ -7,9 +7,7 @@ export const clientsReducer = (state = [], action) => {
             return [
                 ...state,
                 {
-                    ...action.payload,
-                    //VER ESTE ID
-                    //id: new Date().getTime(),
+                    ...action.payload
                 }
             ];
 
@@ -20,8 +18,7 @@ export const clientsReducer = (state = [], action) => {
             return state.map(u => {
                 if (u.id === action.payload.id) {
                     return {
-                        ...action.payload,
-                        //password: u.password
+                        ...action.payload
                     };
                 }
                 return u;

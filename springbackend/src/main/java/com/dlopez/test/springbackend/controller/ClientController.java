@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dlopez.test.springbackend.models.dto.ClientDto;
-import com.dlopez.test.springbackend.models.entities.Address;
 import com.dlopez.test.springbackend.models.entities.Client;
 import com.dlopez.test.springbackend.models.request.ClientRequest;
 import com.dlopez.test.springbackend.services.ClientService;

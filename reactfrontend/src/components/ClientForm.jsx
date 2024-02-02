@@ -10,18 +10,13 @@ export const ClientForm = ({ clientSelected, handlerCloseForm }) => {
 
     const { id, username, name, lastname, identification, email, phone, addresses } = clientForm;
 
-    const [newStreet, setNewStreet] = useState('');
-    const [newNumber, setNewNumber] = useState('');
-
     useEffect(() => {
         setClientForm({
-            ...clientSelected,
-            //password: '',
+            ...clientSelected
         });
     }, [clientSelected]);
 
     const onInputChange = ({ target }) => {
-        // console.log(target.value)
         const { name, value } = target;
         setClientForm({
             ...clientForm,
@@ -32,11 +27,6 @@ export const ClientForm = ({ clientSelected, handlerCloseForm }) => {
 
     const onSubmit = (event) => {
         event.preventDefault();
-
-        //handleAddAddress()
-        //console.log('Aqui')
-        console.log(clientForm)
-
         handlerAddClient(clientForm);
         setClientForm(initialClientForm);
     }
@@ -55,21 +45,6 @@ export const ClientForm = ({ clientSelected, handlerCloseForm }) => {
         });
     };
 
-    /* const handleAddAddress = () => {
-        // Agregar nueva dirección a la lista de direcciones
-        // verifica que los campos contengan algo
-        if (newStreet.trim() !== '' && newNumber.trim() !== '') {
-            setClientForm({
-                ...clientForm,
-                addresses: [...clientForm.addresses, { street: newStreet, number: newNumber }],
-            });
-            setNewStreet('');
-            setNewNumber('');
-        }  else {
-            removeAddress()
-        } 
-    } */
-
     // modifica una direccion existente
     const handleAddressChange = (index, key, value) => {
         const newAddresses = [...addresses];
@@ -79,26 +54,6 @@ export const ClientForm = ({ clientSelected, handlerCloseForm }) => {
             addresses: newAddresses,
         });
     };
-
-
-
-   /*  const removeAddress = () => {
-        const filteredAddresses = clientForm.addresses.filter(address => address.street.trim() !== '' || address.number.trim() !== '');
-        console.log('aqui')
-        console.log(filteredAddresses)
-        setClientForm({
-            ...clientForm,
-            addresses: filteredAddresses,
-        });
-        console.log(clientForm)
-    } */
-
-
-    /* const handleAddressChange = (index, value) => {
-        const newAddresses = [...addresses];
-        newAddresses[index].address = value;
-        setAddresses(newAddresses);
-    }; */
 
     return (
         <form onSubmit={onSubmit}>
@@ -153,29 +108,10 @@ export const ClientForm = ({ clientSelected, handlerCloseForm }) => {
             <input type="hidden"
                 name="id"
                 value={id} />
-            {/* 
-            {!visibleForm && addresses.length === 0 && (
-                <div>
-                    <input
-                        className="form-control my-3 w-50"
-                        placeholder="Street"
-                        name="newStreet"
-                        value={newStreet}
-                        onChange={(e) => setNewStreet(e.target.value)}
-                    />
-                    <input
-                        className="form-control my-3 w-50"
-                        placeholder="Number"
-                        name="newNumber"
-                        value={newNumber}
-                        onChange={(e) => setNewNumber(e.target.value)}
-                    />
-                </div>
-            )} */}
 
             {!visibleForm && clientForm.addresses.map((address, index) => (
                 <div key={index}>
-                    
+
                     <input
                         className="form-control my-3 w-50"
                         placeholder={`Calle ${index + 1}`}

@@ -1,7 +1,6 @@
 package com.dlopez.test.springbackend.models.request;
 
 import java.util.List;
-import java.util.Set;
 
 import com.dlopez.test.springbackend.models.entities.Address;
 

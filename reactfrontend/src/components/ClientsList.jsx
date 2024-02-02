@@ -6,8 +6,8 @@ export const ClientsList = () => {
 
     const { clients } = useContext(ClientContext);
 
-  return (
-    <table className="table table-hover table-striped">
+    return (
+        <table className="table table-hover table-striped">
             <thead>
                 <tr>
                     <th>#</th>
@@ -21,7 +21,6 @@ export const ClientsList = () => {
             </thead>
             <tbody>
                 {
-                    // no pasar password del user
                     clients.map(({ id, username, email, phone }) => (
                         <ClientRow
                             key={id}
@@ -34,5 +33,5 @@ export const ClientsList = () => {
                 }
             </tbody>
         </table>
-  )
+    )
 }

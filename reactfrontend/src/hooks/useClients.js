@@ -31,13 +31,9 @@ export const useClients = () => {
     const [clients, dispatch] = useReducer(clientsReducer, initialClients);
     const [clientSelected, setClientSelected] = useState(initialClientForm)
     const [visibleForm, setVisibleForm] = useState(false);
-    //const [addresses, setAddresses] = useState([]);
-
     const [errors, setErrors] = useState(initialErrors)
 
     const navigate = useNavigate()
-
- 
 
     const getClients = async () => {
         const result = await findAll();
@@ -50,7 +46,6 @@ export const useClients = () => {
 
 
     const handlerAddClient = async (client) => {
-        // console.log(user);
         let response;
 
         try {
@@ -105,7 +100,6 @@ export const useClients = () => {
     }
 
     const handlerRemoveClient = (id) => {
-        // console.log(id);
 
         Swal.fire({
             title: 'Esta seguro que desea eliminar?',
@@ -132,12 +126,6 @@ export const useClients = () => {
 
     }
 
-    /*   const handlerClientSelectedForm = (client) => {
-          // console.log(user)
-          setVisibleForm(true);
-          setClientSelected({ ...client });
-      } */
-
     const handlerClientSelectedForm = (id, showModal) => {
         setErrors({})
         const client = clients.find(u => u.id == id) || initialClientForm;
@@ -157,8 +145,6 @@ export const useClients = () => {
         setErrors({})
     }
 
-    
-
     return {
         clients,
         clientSelected,
@@ -170,8 +156,6 @@ export const useClients = () => {
         handlerClientSelectedForm,
         handlerOpenForm,
         handlerCloseForm,
-        getClients,
-        //handleAddAddress,
-        //handleAddressChange
+        getClients
     }
 }

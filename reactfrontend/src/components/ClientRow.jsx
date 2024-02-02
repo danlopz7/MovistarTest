@@ -16,12 +16,8 @@ export const ClientRow = ({ id, username, email, phone }) => {
                 <button
                     type="button"
                     className="btn btn-secondary btn-sm"
-                    //supongamos que puedo pasar solo el id
                     onClick={() => handlerClientSelectedForm(
                         id, true
-                        //username,
-                        //email,
-                        //phone
                     )}
                 >
                     update

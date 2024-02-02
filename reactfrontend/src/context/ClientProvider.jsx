@@ -14,9 +14,7 @@ export const ClientProvider = ({ children }) => {
         handlerClientSelectedForm,
         handlerOpenForm,
         handlerCloseForm,
-        getClients,
-        //handleAddAddress,
-        //handleAddressChange
+        getClients
     } = useClients();
 
     return (
@@ -32,9 +30,7 @@ export const ClientProvider = ({ children }) => {
                 handlerClientSelectedForm,
                 handlerOpenForm,
                 handlerCloseForm,
-                getClients,
-                //handleAddAddress,
-                //handleAddressChange
+                getClients
             }
         }>
             {children}
