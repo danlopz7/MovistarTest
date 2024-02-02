@@ -1,5 +1,6 @@
 package com.dlopez.test.springbackend.models.entities;
 
+import com.dlopez.test.springbackend.models.auditable.Auditable;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
@@ -22,7 +23,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Address {
+public class Address  extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
