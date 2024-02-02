@@ -39,3 +39,9 @@
         opacity: 1
     }
 }
+
+.nav-link-custom {
+    border: 1px solid #6e6e6e;
+    border-radius: 8px;
+    padding: 6px;
+}

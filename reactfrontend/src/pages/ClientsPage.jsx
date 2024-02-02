@@ -40,6 +40,7 @@ export const ClientsPage = () => {
                     </div>
                 </div>
             </div>
+            
         </>
     )
 }

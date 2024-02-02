@@ -57,48 +57,54 @@ export const ClientForm = ({ clientSelected, handlerCloseForm }) => {
 
     return (
         <form onSubmit={onSubmit}>
+            <label htmlFor="username" className="form-label">Nombre de usuario</label>
             <input
-                className="form-control my-3 w-50"
+                className="form-control  w-50"
                 placeholder="Username"
                 name="username"
                 value={username}
                 onChange={onInputChange} />
             <p className="text-danger">{errors?.username}</p>
 
+            <label htmlFor="name" className="form-label">Nombre</label>
             <input
-                className="form-control my-2 w-50"
+                className="form-control  w-50"
                 placeholder="Name"
                 name="name"
                 value={name}
                 onChange={onInputChange} />
             <p className="text-danger">{errors?.name}</p>
 
+            <label htmlFor="lastname" className="form-label">Apellido</label>
             <input
-                className="form-control my-3 w-50"
+                className="form-control w-50"
                 placeholder="Last name"
                 name="lastname"
                 value={lastname}
                 onChange={onInputChange} />
             <p className="text-danger">{errors?.lastname}</p>
 
+            <label htmlFor="email" className="form-label">Correo</label>
             <input
-                className="form-control my-3 w-50"
+                className="form-control w-50"
                 placeholder="Email"
                 name="email"
                 value={email}
                 onChange={onInputChange} />
             <p className="text-danger">{errors?.email}</p>
 
+            <label htmlFor="phone" className="form-label">Teléfono</label>
             <input
-                className="form-control my-3 w-50"
+                className="form-control w-50"
                 placeholder="Phone"
                 name="phone"
                 value={phone}
                 onChange={onInputChange} />
             <p className="text-danger">{errors?.phone}</p>
 
+            <label htmlFor="identification" className="form-label">Dui</label>
             <input
-                className="form-control my-3 w-50"
+                className="form-control w-50"
                 placeholder="Identification"
                 name="identification"
                 value={identification}
@@ -111,16 +117,16 @@ export const ClientForm = ({ clientSelected, handlerCloseForm }) => {
 
             {!visibleForm && clientForm.addresses.map((address, index) => (
                 <div key={index}>
-
+                    <label htmlFor="address" className="form-label">{`Dirección ${index + 1}`} </label>
                     <input
-                        className="form-control my-3 w-50"
+                        className="form-control w-50"
                         placeholder={`Calle ${index + 1}`}
                         name={`street_${index}`}
                         value={address.street}
                         onChange={(e) => handleAddressChange(index, 'street', e.target.value)}
                     />
                     <input
-                        className="form-control my-3 w-50"
+                        className="form-control my-1 mb-2 w-50"
                         placeholder={`Número ${index + 1}`}
                         name={`number_${index}`}
                         value={address.number}

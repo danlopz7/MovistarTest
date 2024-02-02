@@ -1,6 +1,15 @@
 import axios from 'axios'
 
-const BASE_URL = 'http://localhost:8080/clients'
+export const BASE_URL = 'http://localhost:8080/clients'
+
+export const report = async () => {
+    try {
+        const response = await axios.get(`${BASE_URL}/report`)
+        return response
+    } catch (error) {
+        console.error(error)
+    }
+}
 
 export const findAll = async () => {
 

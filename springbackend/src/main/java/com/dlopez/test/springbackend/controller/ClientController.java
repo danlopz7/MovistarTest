@@ -1,12 +1,17 @@
 package com.dlopez.test.springbackend.controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,6 +28,7 @@ import com.dlopez.test.springbackend.models.dto.ClientDto;
 import com.dlopez.test.springbackend.models.entities.Client;
 import com.dlopez.test.springbackend.models.request.ClientRequest;
 import com.dlopez.test.springbackend.services.ClientService;
+import com.opencsv.CSVWriter;
 
 import jakarta.validation.Valid;
 
@@ -91,5 +97,49 @@ public class ClientController {
             errors.put(err.getField(), "El campo " + err.getField() + " " + err.getDefaultMessage());
         });
         return ResponseEntity.badRequest().body(errors); // 400
+    }
+
+    @GetMapping("/report")
+    public ResponseEntity<byte[]> generateClientReport() {
+        List<Client> clients = clientService.findAll();
+
+        byte[] reportBytes = generateCsvReport(clients);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.TEXT_PLAIN);
+        headers.setContentDispositionFormData("attachment", "client_report.csv");
+
+        return new ResponseEntity<>(reportBytes, headers, HttpStatus.OK);
+    }
+
+    private byte[] generateCsvReport(List<Client> clients) {
+        try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                CSVWriter csvWriter = new CSVWriter(new OutputStreamWriter(baos))) {
+
+            String[] headers = { "ID", "Username", "Name", "Lastname", "Email", "Phone", "Identification",
+                    "Addresses" };
+            csvWriter.writeNext(headers);
+
+            for (Client client : clients) {
+                String[] data = {
+                        String.valueOf(client.getId()),
+                        client.getUsername(),
+                        client.getName(),
+                        client.getLastname(),
+                        client.getEmail(),
+                        client.getPhone(),
+                        client.getIdentification(),
+                        client.getAddresses().toString()
+                };
+                csvWriter.writeNext(data);
+            }
+
+            csvWriter.flush();
+            return baos.toByteArray();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new byte[0];
+        }
     }
 }

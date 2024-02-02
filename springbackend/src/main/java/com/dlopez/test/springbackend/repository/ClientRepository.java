@@ -6,4 +6,5 @@ import com.dlopez.test.springbackend.models.entities.Client;
 
 public interface ClientRepository extends CrudRepository<Client, Long>{
     
+    
 }
