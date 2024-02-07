@@ -1,0 +1,18 @@
+ALTER TABLE clients
+DROP INDEX UK_srdlopksdpbh4qo20au1v8w7r,
+ADD CONSTRAINT UK_username UNIQUE (username),
+DROP INDEX UK_srv16ica2c1csub334bxjjb59,
+ADD CONSTRAINT UK_email UNIQUE (email),
+DROP INDEX UK_4t53k2na0fvk9pxg62n5a898i,
+ADD CONSTRAINT UK_identification UNIQUE (identification),
+DROP INDEX UK_e3it7h0veoeergtkfqxhos5qj,
+ADD CONSTRAINT UK_phone UNIQUE (phone);
+
+INSERT INTO clients (username, name, lastname, email, identification, phone, created_date, modified_date) VALUES ('user1', 'John', 'Doe', 'john.doe@example.com', '123456789', '555-1234', NOW(), NOW());
+INSERT INTO address (client_id, number, street) VALUES (LAST_INSERT_ID(), '123', 'Main Street', NOW(), NOW());
+
+INSERT INTO clients (username, name, lastname, email, identification, phone, created_date, modified_date) VALUES ('user2', 'Jane', 'Smith', 'jane.smith@example.com', '987654321', '555-5678', NOW(), NOW());
+INSERT INTO address (client_id, number, street) VALUES (LAST_INSERT_ID(), '456', 'Elm Street', NOW(), NOW());
+
+INSERT INTO clients (username, name, lastname, email, identification, phone, created_date, modified_date) VALUES ('user3', 'Michael', 'Johnson', 'michael.johnson@example.com', '456789123', '555-9012', NOW(), NOW());
+INSERT INTO address (client_id, number, street) VALUES (LAST_INSERT_ID(), '789', 'Oak Street', NOW(), NOW());
