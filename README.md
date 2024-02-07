@@ -2,7 +2,7 @@
 
 ## _Interfaz Web para Gestión de Clientes y Direcciones_
 
-![N|Solid](https://example.com/imagen.png)
+![N|Solid](Manejo_clientes.png)
 
 Este proyecto es una interfaz web diseñada para la gestión de clientes y sus direcciones, comunicándose con un servicio REST API externo desarrollado en Java con Spring Framework, se implementó un crud que a través del backend interactúa con una base de datos en MySQL para almacenar y gestionar la información de clientes y sus respectivas direcciones.
 
